@@ -145,7 +145,7 @@ class MonkeyCompilerEditer extends Component{
         var nd = sel.anchorNode
         //查看其父节点是否是span,如果不是，
         //我们插入一个span节点用来表示光标所在的行
-        var currentLitneSpan = null;
+        var currentLineSpan = null;
         var elements = document.getElementsByClassName(this.lineSpanNode)
         for (var i = 0; i < elements.length; i++) {
             var element = elements[i]
