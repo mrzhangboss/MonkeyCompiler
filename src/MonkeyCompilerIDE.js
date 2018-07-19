@@ -2,20 +2,26 @@ import React , {Component} from 'react'
 import * as bootstrap from 'react-bootstrap'
 import MonkeyLexer from './MonkeyLexer'
 import MonkeyCompilerEditer from './MonkeyCompilerEditer'
+import MonkeyCompilerParser from './MonkeyCompilerParser'
 
 class MonkeyCompilerIDE extends Component {
     constructor(props) {
         super(props)
         this.lexer = new MonkeyLexer("")
     }
-
+    // change here
     onLexingClick () {
       this.lexer = new MonkeyLexer(this.inputInstance.getContent())
-    	this.lexer.lexing()
+      this.parser = new MonkeyCompilerParser(this.lexer)
+      this.parser.parseProgram()
+      this.program = this.parser.program
+      for (var i = 0; i < this.program.statements.length; i++) {
+          console.log(this.program.statements[i].getLiteral())
+      }
     }
 
     render () {
-
+        // change here
         return (
           <bootstrap.Panel header="Monkey Compiler" bsStyle="success">
             <MonkeyCompilerEditer 
@@ -24,7 +30,7 @@ class MonkeyCompilerIDE extends Component {
             <bootstrap.Button onClick={this.onLexingClick.bind(this)} 
              style={{marginTop: '16px'}}
              bsStyle="danger">
-              Lexing
+              Parsing
             </bootstrap.Button>
           </bootstrap.Panel>
           );
